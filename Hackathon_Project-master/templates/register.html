@@ -1,0 +1,872 @@
+
+<!DOCTYPE html>
+
+
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Add icon library -->
+<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/smoothness/jquery-ui.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+    integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet">
+
+	<script src="https://use.fontawesome.com/939e9dd52c.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .input-container {
+      display: -ms-flexbox;
+      /* IE10 */
+      display: flex;
+      width: 100%;
+      height:100%;
+
+      margin-bottom: 15px;
+      min-width: 50%;
+    }
+
+    .icon {
+      padding: 10px;
+      background: dodgerblue;
+      color: white;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      outline: none;
+    }
+
+    .input-field:focus {
+      border: 2px solid dodgerblue;
+    }
+
+    /* Set a style for the submit button */
+    .btn {
+      background-color: dodgerblue;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      cursor: pointer;
+      width: 50%;
+      opacity: 0.9;
+      color: white;
+      margin: 10px 0;
+
+
+    }
+
+    .cancelbtn {
+      padding: 14px 20px;
+      background-color: #f44336;
+      width: 50%;
+      float: left;
+      opacity: 0.9;
+      color: white;
+      border: none;
+      cursor: pointer;
+
+
+      margin: 10px 0;
+    }
+
+    .btn:hover {
+      opacity: 1;
+    }
+
+
+
+
+    .container {
+      padding: 16px;
+    }
+
+
+
+    .col_half {
+      width: 50%;
+      float: left;
+      margin: 10px;
+    }
+
+
+    sel {
+
+      -webkit-appearance: button;
+      -webkit-border-radius: 2px;
+      -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+      -webkit-padding-end: 20px;
+      -webkit-padding-start: 2px;
+      -webkit-user-select: none;
+      background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+      background-position: 97% center;
+      background-repeat: no-repeat;
+      border: 1px solid #AAA;
+      color: #555;
+      font-size: inherit;
+      margin: 20px;
+      overflow: hidden;
+      padding: 5px 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 300px;
+
+
+    }
+
+
+
+
+
+
+    /* The container of radio button*/
+    .containers {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      float: left;
+      margin-top: 7px;
+    }
+
+    /* Hide the browser's default radio button */
+    .containers input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      background-color: #eee;
+      border-radius: 50%;
+
+
+    }
+
+    /* On mouse-over, add a grey background color */
+    .containers:hover input~.checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .containers input:checked~.checkmark {
+      background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .containers input:checked~.checkmark:after {
+      display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .containers .checkmark:after {
+      top: 7px;
+      left: 7px;
+      width: 7px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    #preview-inputs {
+     display: none;
+	width: 550%;
+      margin-bottom: 15px;
+      min-width: 50%;
+	font-size:18px;
+	text-align: justify;
+      border: 15px;
+  	padding: 50px;
+	margin-top:20px;
+ 	 
+    }
+
+.buttons {
+  background-color: #f44336; 
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 24px;
+}
+.buttonss {
+  background-color: dodgerblue;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  padding: 10px 24px;
+}
+
+.autocomplete{
+   position: relative;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  backgroud-color:white;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    margin-left:65px;
+    min-width: 50%;
+}
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 50%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
+
+    a:link, a:visited {
+  text-decoration: none;
+  color: white;
+
+}
+
+a:hover, a:active {
+  background-color: none;
+}
+
+#myDIV {
+  width: 100%;
+  padding: 5px;
+  padding-bottim:5px;
+  text-align: center;
+
+  margin-top: 10px;
+}
+  </style>
+</head>
+
+<body>
+
+  <form action=" " id="register-form" style="max-width:550px;margin:auto" method="Post" enctype='multipart/form-data' onsubmit="return checkstr()">
+      {% csrf_token %}
+    <center>
+      <h2>Register Form</h2><br />
+    </center>
+    <h4>登録するにはこのフォームに記入してください</h4>
+
+
+
+    <div class="input-container">
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="名*" id="first-name" name="usrnm1"
+        autocomplete="off"  maxlength="60"  autofocus="autofocus" required />&nbsp&nbsp
+
+
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="苗字*" id="last-name" name="usrnm2" autocomplete="off" maxlength="60"   required/>
+
+
+    </div>
+
+
+    <div class="input-container">
+      <i class="fa fa-venus-double icon"></i> &nbsp&nbsp
+      <label class="containers">男性
+        <input type="radio" checked="checked" name="radio" value="男性"> 	&nbsp
+        <span class="checkmark"></span>
+      </label>
+      <label class="containers">女性*
+        <input type="radio" name="radio" float="left" value="男性">
+        <span class="checkmark"></span>
+      </label></div>
+
+
+
+
+
+
+
+
+    <div class="input-container">
+      <i class="fa fa-calendar icon"></i>
+      <input class="input-field" id="cal" type="date" placeholder="生年月日*" name="dob" min="1989-01-01" max="2002-12-31"
+        pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>&nbsp&nbsp
+
+      <i class="fa fa-phone icon"></i>
+      <input type="tel" class="input-field" id= "ph" name="phone"  pattern="[0-9]{3}[0-9]{4}[0-9]{4}" maxlength="11"
+        placeholder="Format: 123-4567-891*" autocomplete="off" onkeypress="return IsNumeric(event);" required />
+        <span id="error" ></span>
+    </div>
+
+
+
+
+    <div class="input-container" id="em">
+      <i class="fa fa-envelope icon"></i>
+      <input type="email" class="input-field" name="emails" id="eml1" placeholder="メールIDを書いて下さい*"
+        autocomplete="off" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  maxlength="100"  required />&nbsp&nbsp
+
+      <i class="fa fa-envelope icon"></i>
+
+      <input class="input-field" type="email" name="emails1" id="eml2" placeholder="メールIDを確認して下さい*"
+        autocomplete="off"pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="100" required />
+    </div>
+
+
+
+    <div class="input-container">
+      <i class="fa fa-suitcase icon"></i>
+      <input class="input-field" type="text" id="a" placeholder="所属" name="aff" autocomplete="off"
+        onclick="checkstr()" maxlength="60" onclick="checkstr()" >&nbsp&nbsp
+
+
+      <i class="fa fa-newspaper-o icon"></i>
+      <input class="input-field" type="text" id = "d" placeholder="部門" name="dept" autocomplete="off" maxlength="60">
+    </div>
+
+
+
+
+    <div class="input-container">
+      <i class="fa fa-facebook-official icon"></i>
+      <input class="input-field" type="text" placeholder="facebookID" name="fb" id="inputWord" autocomplete="off" maxlength="50">
+      &nbsp&nbsp&nbsp
+      <a href="#" onclick="doSearch()" target="_blank" ><i class="fa fa-facebook-f"
+          style="color: #3b5998; font-size:28px; padding-top:7px; padding-right:6px;"></i></a>
+      <br />
+    </div>
+
+
+
+    <div class="input-container">
+      <i class="fa fa-twitter-square icon"></i>
+      <input class="input-field" type="text" placeholder="TwitterののID" name="tw" id="input"
+        autocomplete="off" maxlength="50">&nbsp&nbsp
+      <a href="#" onclick="doSearch1()"> <i class="fa fa-twitter"
+          style="color: #1DA1F2; font-size:30px; padding-top:6px"></i></a>
+
+
+    </div>
+
+
+
+    <div class="input-container">
+      <i class="fa fa-github-square icon"></i>
+      <input class="input-field" type="text" placeholder="Github ID" name="gt" id="inputs"
+        autocomplete="off" maxlength="50">&nbsp&nbsp
+      <a href="#" onclick="doSearch2()"><i class="fa fa-github"
+          style="color: black; font-size:30px; padding-top:5px"></i></a>
+    </div>
+
+
+
+    <div class="input-container" >
+      <i class="fa fa-font icon"></i>
+      
+
+  <input type="text" id="tags" size="50" class="input-field" name="sks" placeholder="スキルを書いて下さい*" onclick="checkstr()" maxlength="150"   required>
+
+    </div>
+
+
+
+
+
+    <div class="input-container">
+      <i class="fa fa-bar-chart icon"></i>
+
+
+      <select id="lv" required name="lvvv">
+        <option value="">レベルを選んで下さい*</option>
+        <option value="学生">学生</option>
+        <option value="初心者">初心者</option>
+        <option value="中級">中級</option>
+        <option value="専門家">専門家</option>
+        <option value="高度な">高度な</option>
+
+      </select>&nbsp&nbsp
+      <i class="fa fa-circle-o-notch icon"></i>
+      <input class="input-field" type="number" id="ex" placeholder="経験*" pattern="[0-9]{2}" name="expp" autocomplete="off" min="0" max="15" required/>
+    </div>
+
+
+
+
+    <div class="input-container">
+<i class="fa fa-upload icon"></i>
+
+      <input class="input-field" type="text" id="u" placeholder="ポートフォリオURL " name="upurl" autocomplete="off" maxlength="300"
+        >
+    </div>
+
+
+        <div class="row files" id="files1">
+
+                <span class="btn btn-default btn-file">
+                    ファイルをアップロードして下さい<input type="file" id="fileButton" value="upload" multiple/>
+                </span>
+                <br />
+                <ul class="fileList" id="fl"></ul>
+            </div>
+
+
+
+
+    <div class="input-container">
+      <i class="far fa-edit icon" align="right" width="48" height="48"></i>
+
+      <textarea id="mytext1" rows="2" cols="50" input class="input-field" name="rmks"
+        placeholder="ここにクエリを書いて下さい。。。" maxlength="1000"></textarea>
+    </div>
+
+     <div class="input-container">
+
+    <p><input type="checkbox" required name="terms" style="width: 22px; height: 22px;   vertical-align: middle;" onclick=" return checkstr()">&nbsp アカウントを作成すると、利用規約とプライバシーに同意したことになります <a href="#" style="color:dodgerblue"></a>.</p>
+
+     </div>
+    <div class="input-container">
+      <button type="button" onclick="window.location.href = 'index.html';" class="cancelbtn"><a href="{% url 'index' %}">キャンセル</a></button>&nbsp&nbsp
+   <button type="submit" class="btn" onclick="checkstr()"> <a href="{% url 'index' %}">レジスター</a></button>
+    </div>
+
+
+    <input id="jap" name="jap" type="hidden" value="日本人" />
+  </form>
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+   var firebaseConfig = {
+ apiKey: "AIzaSyAmOevXNhmn7i06EHqpUQlw8fu5GFpCSis",
+ authDomain: "demo1-52a71.firebaseapp.com",
+ databaseURL: "https://demo1-52a71.firebaseio.com",
+ projectId: "demo1-52a71",
+ storageBucket: "demo1-52a71.appspot.com",
+ messagingSenderId: "673911723297",
+ appId: "1:673911723297:web:7e49debfa37bd7bd"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+
+  //-------------------------------------
+
+  var uploader = document.getElementById('uploader');
+  var fileButton = document.getElementById('fileButton');
+  fileButton.addEventListener('change', function(e){
+  var file = e.target.files[0];
+  var storageRef = firebase.storage().ref('japanese/'+file.name);
+  var task = storageRef.put(file);
+  task.on('state_changed', function progress(snapshot) {
+    var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+    uploader.value = percentage;
+
+  }, function error(err) {
+
+
+  },function complete() {
+
+  });
+});
+
+
+</script>
+
+
+
+
+  <script>
+    
+    function myFun(e) {
+      var x = document.getElementById("myFile").multiple;
+      document.getElementById("demo").innerHTML = x;
+    }
+
+    function doSearch() {
+      let word = document.querySelector('#inputWord').value;
+      window.open( "https://www.facebook.com/" + word);
+      target = "_blank";
+    }
+
+    function doSearch1() {
+      let word = document.querySelector('#input').value;
+      window.open("https://twitter.com/" + word) ;
+	 target = "_blank";
+    }
+
+    function doSearch2() {
+      word = document.querySelector('#inputs').value;
+      window.open( "https://github.com/" + word);
+      target = "_blank";
+    }
+
+ function checkstr() {
+      var Eml1 = document.getElementById("eml1").value;
+      var Eml2 = document.getElementById("eml2").value;
+
+
+
+      if (Eml2 != Eml1) {
+        alert("please write your mail id ");
+        return false;
+
+
+      }
+    }
+
+
+   </script>
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var availableTags = [
+
+
+       "ANGULARJS",
+       "ASP.NET",
+       "BOOTSTRAP",
+      "CSS",
+      "GO",
+      "C",
+      "C++",
+      "C#",
+      "COBOL",
+      "HTML",
+      "Java",
+      "JQUERY",
+       "JavaScript",
+      "MYSQL",
+      "MATLAB",
+      "NODEJS",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "REACT",
+      "R",
+      "SQL",
+    ];
+    function split( val ) {
+      return val.split( /,\s*/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+ $( "#tags" )
+                          // don't navigate away from the field on tab when selecting an item
+                          .bind( "keydown", function( event ) {
+                            if ( event.keyCode === $.ui.keyCode.TAB &&
+                                $( this ).autocomplete( "instance" ).menu.active ) {
+                              event.preventDefault();
+                            }
+                          })
+                          .autocomplete({
+                            minLength: 0,
+                            source: function( request, response ) {
+                              var term = $.ui.autocomplete.escapeRegex(extractLast(request.term))
+                                    // Create two regular expressions, one to find suggestions starting with the user's input:
+                                    , startsWithMatcher = new RegExp("^" + term, "i")
+                                    , startsWith = $.grep(availableTags, function(value) {
+                                        return startsWithMatcher.test(value.label || value.value || value);
+                                    })
+                                    // ... And another to find suggestions that just contain the user's input:
+                                    , containsMatcher = new RegExp(term, "i")
+                                    , contains = $.grep(availableTags, function (value) {
+                                        return $.inArray(value, startsWith) < 0 &&
+                                            containsMatcher.test(value.label || value.value || value);
+                                    });
+
+                                // Supply the widget with an array containing the suggestions that start with the user's input,
+                                // followed by those that just contain the user's input.
+                                response(startsWith.concat(contains));
+                            },
+                            focus: function() {
+                              // prevent value inserted on focus
+                              return false;
+                            },
+                            select: function( event, ui ) {
+                              var terms = split( this.value );
+                              // remove the current input
+                                 terms.pop();
+                              // add the selected item
+                             // var projectDiv = '<div class="projectBody" id="selectedItems">'+ ui.item.value +'</div>';
+                              terms.push( ui.item.value );
+                              for(var i = 0; i < terms.length; i++)
+                                {
+                                    var elements = terms[i];
+                                }
+                              console.log('<div class="projectBody" id="selectedItems">'+ ui.item.value +'</div>');
+                              $("#selectedItems").css("backgroundColor", "blue");
+                              // add placeholder to get the comma-and-space at the end
+                              terms.push( "" );
+                              this.value = terms.join( "," );
+                              return false;
+        }
+      });
+  } );
+  </script>
+
+
+
+
+
+<script>
+$.fn.fileUploader = function (filesToUpload, sectionIdentifier) {
+    var fileIdCounter = 0;
+
+    this.closest(".files").change(function (evt) {
+        var output = [];
+
+        for (var i = 0; i < evt.target.files.length; i++) {
+            fileIdCounter++;
+            var file = evt.target.files[i];
+            var fileId = sectionIdentifier + fileIdCounter;
+
+            filesToUpload.push({
+                id: fileId,
+                file: file
+            });
+
+            var removeLink = "<a class=\"removeFile\" href=\"#\" data-fileid=\"" + fileId + "\">Remove</a>";
+
+            output.push("<li><strong>", escape(file.name), "</strong> - ", file.size, " bytes. &nbsp; &nbsp; ", removeLink, "</li> ");
+        };
+
+        $(this).children(".fileList")
+            .append(output.join(""));
+
+        //reset the input to null - nice little chrome bug!
+        evt.target.value = null;
+    });
+
+    $(this).on("click", ".removeFile", function (e) {
+        e.preventDefault();
+
+        var fileId = $(this).parent().children("a").data("fileid");
+
+        // loop through the files array and check if the name of that file matches FileName
+        // and get the index of the match
+        for (var i = 0; i < filesToUpload.length; ++i) {
+            if (filesToUpload[i].id === fileId)
+                filesToUpload.splice(i, 1);
+        }
+
+        $(this).parent().remove();
+    });
+
+    this.clear = function () {
+        for (var i = 0; i < filesToUpload.length; ++i) {
+            if (filesToUpload[i].id.indexOf(sectionIdentifier) >= 0)
+                filesToUpload.splice(i, 1);
+        }
+
+        $(this).children(".fileList").empty();
+    }
+
+    return this;
+};
+
+(function () {
+    var filesToUpload = [];
+
+    var files1Uploader = $("#files1").fileUploader(filesToUpload, "files1");
+    var files2Uploader = $("#files2").fileUploader(filesToUpload, "files2");
+    var files3Uploader = $("#files3").fileUploader(filesToUpload, "files3");
+
+    $("#uploadBtn").click(function (e) {
+        e.preventDefault();
+
+        var formData = new FormData();
+
+        for (var i = 0, len = filesToUpload.length; i < len; i++) {
+            formData.append("files", filesToUpload[i].file);
+        }
+
+        $.ajax({
+            url: "http://requestb.in/1k0dxvs1",
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: function (data) {
+                alert("DONE");
+
+                files1Uploader.clear();
+                files2Uploader.clear();
+                files3Uploader.clear();
+            },
+            error: function (data) {
+                alert("ERROR - " + data.responseText);
+            }
+        });
+    });
+})()
+</script>
+
+  <!-- right click disabled fucntion -->
+
+<SCRIPT language=JavaScript>
+
+
+
+var message = "function disabled";
+
+function rtclickcheck(keyp){ if (navigator.appName == "Netscape" && keyp.which == 3){ alert(message); return false; }
+
+if (navigator.appVersion.indexOf("MSIE") != -1 && event.button == 2) { alert(message); return false; } }
+
+document.onmousedown = rtclickcheck;
+
+</SCRIPT>
+
+
+<!-- validating only alphabets in first name and last name field -->
+
+<script language="Javascript" type="text/javascript">
+
+        function onlyAlphabets(e, t) {
+            try {
+                if (window.event) {
+                    var charCode = window.event.keyCode;
+                }
+                else if (e) {
+                    var charCode = e.which;
+                }
+                else { return true; }
+                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode == 13))
+                    return true;
+                else
+                    return false;
+            }
+            catch (err) {
+                alert(err.Description);
+            }
+        }
+
+</script>
+
+
+<!-- validating only number in phone field -->
+
+<script type="text/javascript">
+        var specialKeys = new Array();
+        specialKeys.push(8); //Backspace
+        function IsNumeric(e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1 || (keyCode == 13));
+            document.getElementById("error").style.display = ret ? "none" : "inline";
+            return ret;
+        }
+</script>
+
+<script>
+
+
+    $('body').on('keydown', 'input, select, textarea', function(e) {
+    var self = $(this)
+      , form = self.parents('form:eq(0)')
+      , focusable
+      , next
+      ;
+    if (e.keyCode == 13) {
+        focusable = form.find('input,a,select,button,textarea').filter(':visible');
+        next = focusable.eq(focusable.index(this)+1);
+        if (next.length) {
+            next.focus();
+        } else {
+            form.submit();
+        }
+        return false;
+    }
+});
+</script>
+
+</body>
+</html>

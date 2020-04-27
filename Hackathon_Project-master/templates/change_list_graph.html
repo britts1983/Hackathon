@@ -1,0 +1,220 @@
+{% extends "admin/change_list.html" %}
+{% load staticfiles %}
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+
+
+    <script>
+        var randomColorGenerator = function () {
+            return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+        };
+        var options = {
+
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+                position: 'bottom'
+
+
+            },
+            title: {
+                display: true,
+                text: '状態',
+
+
+
+
+             },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+         var options1 = {
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+                position: 'bottom'
+
+            },
+            title: {
+                display: true,
+                text: '国籍',
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+
+         var options2 = {
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+                position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: '経験',
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+
+         var options3 = {
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+                position: 'bottom'
+            },
+            title: {
+                display: true,
+                text: '性別',
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+         var options4 = {
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+                position: 'left'
+            },
+            title: {
+                display: true,
+                text: 'レベル',
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+
+        window.onload = function () {
+
+            ctx = document.getElementById("gender-chart");
+
+
+            {% regroup cl.queryset|dictsort:"性別" by 性別 as 性別_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [{% for gender in 性別_list %}'{{ gender.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for gender in 性別_list %}'{{ gender.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for gender in 性別_list %}randomColorGenerator(),{% endfor %}]
+
+                    }]
+                }, options: options3
+            });
+
+
+             ctx = document.getElementById("exp-chart");
+
+            {% regroup cl.queryset|dictsort:"経験" by 経験 as 経験_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+
+                data: {
+
+                    labels: [{% for exp in 経験_list %}'{{ exp.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for exp in 経験_list %}'{{ exp.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for exp in 経験_list %}randomColorGenerator(),{% endfor %}]
+
+                    }]
+                }, options: options2
+
+            });
+
+
+            ctx = document.getElementById("language-chart");
+            {% regroup cl.queryset|dictsort:"国籍" by 国籍 as 国籍_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [{% for nat in 国籍_list %}'{{ nat.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for nat in 国籍_list %}'{{ nat.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for nat in 国籍_list %}randomColorGenerator(),{% endfor %}]
+                    }]
+                }, options: options1
+            });
+
+             ctx = document.getElementById("status-chart");
+            {% regroup cl.queryset|dictsort:"状態" by 状態 as 状態_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [{% for stat in 状態_list %}'{{ stat.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for stat in 状態_list %}'{{ stat.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for stat in 状態_list %}randomColorGenerator(),{% endfor %}]
+
+
+                    }]
+
+                }, options: options
+            });
+
+        }
+
+
+    </script>
+<script>
+    function toggle(){
+
+ var x = document.getElementById("pieCanvas");
+if(x.style.display == "block")
+{
+    x.style.display = "none";
+    var togglebtn = document.getElementById("tog").value="Piechartを開く";
+
+
+}
+else
+{
+    x.style.display = "block";
+    var togglebtn = document.getElementById("tog").value="Piechartを閉じる";
+
+
+}
+
+  }
+</script>
+
+
+{% endblock %}
+{% block content %}
+
+        <input type="submit" onclick="toggle()" value="Piechartを閉じる" id="tog">
+
+        <div id="pieCanvas">
+
+        <div class="col-sm-4">
+            <canvas id="status-chart" style=".."></canvas>
+        </div>
+
+         <div class="col-sm-4">
+            <canvas id="gender-chart" style=".."></canvas>
+        </div>
+
+        <div class="col-sm-4">
+            <canvas id="language-chart" style="width: 100px !important;"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <canvas id="exp-chart" style="width: 100px !important;"></canvas>
+        </div>
+
+    </div>
+    </div>
+    {{ block.super }}
+
+
+{% endblock %}
